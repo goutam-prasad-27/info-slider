@@ -1,0 +1,326 @@
+* {
+	margin: 0%;
+	padding: 0%;
+	box-sizing: border-box;
+}
+
+/*? ==========>> FONTS USED */
+@font-face {
+	font-family: geist;
+	src: url(font/Geist-UltraBlack.ttf) format("truetype");
+}
+@font-face {
+	font-family: mosk;
+	src: url(font/Mosk-Light300.ttf) format("truetype");
+}
+
+/*? ===========>> MAIN BODY ADJUSTMENTS */
+body {
+	font-family: mosk;
+	font-weight: 500;
+	line-height: 20px;
+	letter-spacing: 2px;
+	background: black;
+	color: white;
+	font-size: 0.9rem;
+}
+
+/*? ==========>> NAVBAR STYLE */
+a {
+	font-family: mosk;
+	text-decoration: none;
+	color: #eee;
+}
+header {
+	width: 1140px;
+	max-width: 80%;
+	margin: auto;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	position: relative;
+	z-index: 100;
+}
+header a {
+	margin-right: 40px;
+}
+
+/*? ============>> MAIN CONTENT STYLE */
+.wrapper {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	margin-top: -50px;
+	position: relative;
+}
+.wrapper .list .items {
+	position: absolute;
+	inset: 0 0 0 0;
+}
+.wrapper .list .items img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.wrapper .list .items .content {
+	position: absolute;
+	top: 15%;
+	width: 1140px;
+	max-width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding-right: 30%;
+	text-shadow: 0 5px 10px #000400;
+}
+.wrapper .list .items .content .author {
+	font-weight: bold;
+	letter-spacing: 10px;
+	font-family: mosk;
+	text-transform: uppercase;
+}
+.wrapper .list .items .content .des {
+	width: 900px;
+}
+.wrapper .list .items .content .title,
+.wrapper .list .items .content .topic {
+	font-weight: 800;
+	font-size: 4.5em;
+	line-height: 1.3em;
+	font-family: geist;
+}
+.wrapper .list .items .content .topic {
+	color: #ff9933;
+	letter-spacing: 15px;
+}
+.wrapper .list .items .content .buttons {
+	display: grid;
+	grid-template-columns: repeat(2, 130px);
+	grid-template-rows: 40px;
+	gap: 5px;
+	margin-top: 20px;
+}
+.wrapper .list .items .content button {
+	border: none;
+	background-color: #ff9933;
+	color: #292929;
+	letter-spacing: 3px;
+	font-family: geist;
+	font-weight: 500;
+}
+.wrapper .list .items .content button:nth-child(2) {
+	background-color: transparent;
+	color: #eee;
+	border: 1px solid #ff9933;
+}
+
+/*? ============>> THUMBNAIL STYLE */
+.thumbnail {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	width: max-content;
+	z-index: 100;
+	display: flex;
+	gap: 20px;
+}
+.thumbnail .items {
+	width: 150px;
+	height: 220px;
+	flex-shrink: 0;
+	position: relative;
+}
+.thumbnail .items img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 20px;
+}
+.thumbnail .items .content {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+}
+.thumbnail .items .content .title {
+	font-weight: bold;
+}
+
+/*? ============>> ARROW BUTTONS STYLE */
+.arrows {
+	position: absolute;
+	top: 80%;
+	right: 52%;
+	width: 300px;
+	max-width: 38%;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.arrows button {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #eee4;
+	border: none;
+	font-family: mosk;
+	color: #fff;
+	font-weight: bold;
+	font-size: large;
+	transition: 0.5s;
+	z-index: 100;
+}
+.arrows button:hover {
+	background-color: #ff9933;
+	color: #555;
+}
+
+/*? ============>> CONTENT INFO STYLE */
+.wrapper .list .items:nth-child(1) {
+	z-index: 1;
+}
+.wrapper .list .items:nth-child(1) .author,
+.wrapper .list .items:nth-child(1) .title,
+.wrapper .list .items:nth-child(1) .topic,
+.wrapper .list .items:nth-child(1) .des,
+.wrapper .list .items:nth-child(1) .buttons {
+	transform: translateY(50px);
+	filter: blur(20px);
+	opacity: 0;
+	animation: showContent 0.5s 1s linear 1 forwards;
+}
+.wrapper .list .items:nth-child(1) .title {
+	animation-delay: 0.8s;
+}
+.wrapper .list .items:nth-child(1) .topic {
+	animation-delay: 1s;
+}
+.wrapper .list .items:nth-child(1) .des {
+	animation-delay: 1.2s;
+}
+.wrapper .list .items:nth-child(1) .buttons {
+	animation-delay: 1.4s;
+}
+@keyframes showContent {
+	to {
+		opacity: 1;
+		filter: blur(0);
+		transform: translateY(0);
+	}
+}
+
+/*? ============>> NEXT THUMBNAIL STYLE */
+.wrapper.next .list .items:nth-child(1) img {
+	width: 150px;
+	height: 220px;
+	position: absolute;
+	left: 50%;
+	bottom: 50px;
+	border-radius: 20px;
+	animation: showImage 0.5s linear 1 forwards;
+}
+
+.wrapper.next .thumbnail .items:nth-child(1) {
+	width: 0;
+	overflow: hidden;
+	animation: showThumbnail 0.5s linear 1 forwards;
+}
+.wrapper.next .thumbnail {
+	transform: translateX(150px);
+	animation: transformThumbnail 0.5s linear 1 forwards;
+}
+@keyframes showImage {
+	to {
+		width: 100%;
+		height: 100%;
+		left: 0;
+		bottom: 0;
+		border-radius: 0;
+	}
+}
+@keyframes showThumbnail {
+	to {
+		width: 150px;
+	}
+}
+@keyframes transformThumbnail {
+	to {
+		transform: translateX(0);
+	}
+}
+
+/*? ============>> PERV THUMBNAIL STYLE */
+.wrapper.prev .list .items:nth-child(2) {
+	z-index: 2;
+}
+.wrapper.prev .list .items:nth-child(2) img {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	animation: outImage 0.5s linear 1 forwards;
+}
+@keyframes outImage {
+	to {
+		width: 150px;
+		height: 220px;
+		border-radius: 20px;
+		left: 50%;
+		bottom: 50px;
+	}
+}
+.wrapper.prev .thumbnail .items:nth-child(1) {
+	width: 0;
+	overflow: hidden;
+	opacity: 0;
+	animation: showThumbnail 0.5s linear 1 forwards;
+}
+.wrapper.prev .list .items:nth-child(2) .author,
+.wrapper.prev .list .items:nth-child(2) .title,
+.wrapper.prev .list .items:nth-child(2) .topic,
+.wrapper.prev .list .items:nth-child(2) .des,
+.wrapper.prev .list .items:nth-child(2) .buttons {
+	animation: contentOut 1s linear 1 forwards;
+}
+@keyframes contentOut {
+	to {
+		transform: translateX(150px);
+		filter: blur(20px);
+		opacity: 0;
+	}
+}
+
+/*? ============>> PREV & NEXT BUTTON STYLE */
+.wrapper.next .arrows button,
+.wrapper.prev .arrows button {
+	pointer-events: none;
+}
+
+/*? ============>> TIMELINE STYLE */
+.time {
+	width: 0%;
+	height: 5px;
+	background-color: #ff9933;
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+}
+.wrapper.next .time,
+.wrapper.prev .time {
+	width: 100%;
+	animation: timeRunning 1.5s ease-in-out 1 forwards;
+}
+@keyframes timeRunning {
+	to {
+		width: 0;
+	}
+}
+
+/*? ==========>> MEDIA FOR MOB */
+@media screen and (max-width: 678px) {
+	.wrapper .list .items .content {
+		padding-right: 0;
+	}
+	.wrapper .list .items .content .title {
+		font-size: 30px;
+	}
+}
