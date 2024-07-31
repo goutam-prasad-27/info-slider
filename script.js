@@ -1,56 +1,67 @@
-let nextDom = document.getElementById("next"); //? Get the next button DOM
-let prevDom = document.getElementById("prev"); //? Get the previous button DOM
-let wrapperDom = document.querySelector(".wrapper"); //? Get the wrapper DOM
-let listItemsDom = document.querySelector(".wrapper .list"); //? Get the list items DOM
-let thumbnailDom = document.querySelector(".wrapper .thumbnail"); //? Get the thumbnail DOM
+//?=========> MAIN WRAPPER AND ELEMENTS
+const main = {
+	wrapper: document.querySelector(".wrapper"),
+	listItems: document.querySelector(".wrapper .list"),
+	thumbnail: document.querySelector(".wrapper .thumbnail"),
+};
 
-//? ========>>> MOVES TO THE NEXT ITEM
-nextDom.onclick = () => {
+//?=========> BUTTONS AND TIME
+const mainBtn = {
+	nextBtn: document.getElementById("next"),
+	prevBtn: document.getElementById("prev"),
+};
+const time = {
+	timeRunning: 3000,
+	timeAutoNext: 5000,
+};
+
+//?=========> RUNTIME
+let runTimeOut;
+
+//?=========> EVENT LISTENERS FOR NEXT BUTTON
+mainBtn.nextBtn.onclick = () => {
 	showSlider("next");
 };
-//? ========>>> MOVES TO THE PREV ITEM
-prevDom.onclick = () => {
+
+//?=========> EVENT LISTENERS FOR PREVIOUS BUTTON
+mainBtn.prevBtn.onclick = () => {
 	showSlider("prev");
 };
 
-let timeRunning = 2000; //? Time in milliseconds between slides
-let timeAutoNext = 5000; //? Time in milliseconds between auto-next slide
-let runTimeOut; //? Timeout for running the slide
-
-//? ========>>> STARTS THE AUTO-RUN
+//?=========> RUN AUTO SLIDER
 let runAutoRun = setTimeout(() => {
-	nextDom.click();
-}, timeAutoNext);
+	mainBtn.nextBtn.click();
+}, time.timeAutoNext);
 
-//? ========>>> SHOW THE SLIDER WITH THE SELECTED TYPE
-function showSlider(type) {
+//?=========> SHOW SLIDER WITH SELECTED TYPE
+const showSlider = (type) => {
 	let itemSlider = document.querySelectorAll(".wrapper .list .items");
 	let itemThumbnail = document.querySelectorAll(
 		".wrapper .thumbnail .items"
 	);
-
-	//? ========>>> HIDE CURRENT ACTIVE THUMBNAIL
+	//?=========> HIDE CURRENT ACTIVE THUMBNAIL
 	if (type === "next") {
-		listItemsDom.appendChild(itemSlider[0]);
-		thumbnailDom.appendChild(itemThumbnail[0]);
-		wrapperDom.classList.add("next");
+		main.listItems.appendChild(itemSlider[0]);
+		main.thumbnail.appendChild(itemThumbnail[0]);
+		main.wrapper.classList.add("next");
 	} else {
+		//?=========> SHOW THE NEXT ACTIVE THUMBNAIL
 		let positionLastItem = itemSlider.length - 1;
-		listItemsDom.prepend(itemSlider[positionLastItem]);
-		thumbnailDom.prepend(itemThumbnail[positionLastItem]);
-		wrapperDom.classList.add("prev");
+		main.listItems.prepend(itemSlider[positionLastItem]);
+		main.thumbnail.prepend(itemThumbnail[positionLastItem]);
+		main.wrapper.classList.add("prev");
 	}
 
-	//? ========>>> SHOW THE NEXT ACTIVE THUMBNAIL
+	//?=========> SHOW THE NEXT ACTIVE THUMBNAIL
 	clearTimeout(runTimeOut);
 	runTimeOut = setTimeout(() => {
-		wrapperDom.classList.remove("next");
-		wrapperDom.classList.remove("prev");
-	}, timeRunning);
+		main.wrapper.classList.remove("next");
+		main.wrapper.classList.remove("prev");
+	}, time.timeRunning);
 
-	//? ========>>> STARTS THE AUTO-RUN
+	//?=========> START AUTO SLIDER
 	clearTimeout(runAutoRun);
 	runAutoRun = setTimeout(() => {
-		nextDom.click();
-	}, timeAutoNext);
-}
+		mainBtn.nextBtn.click();
+	}, time.timeAutoNext);
+};
